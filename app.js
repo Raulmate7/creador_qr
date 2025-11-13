@@ -42,11 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
             height: 280,
             data: text,
             image: uploadedLogoUrl || '',
-            // IMPORTANTE: Nivel de corrección Alto para soportar logos grandes
+            // IMPORTANTE: Nivel de corrección Alto es CRÍTICO para logos grandes
             qrOptions: {
                 typeNumber: 0,
                 mode: 'Byte',
-                errorCorrectionLevel: 'H' // 'H' = High (Alto)
+                errorCorrectionLevel: 'H' // 'H' = High (Alto), permite hasta un 30% de daño
             },
             dotsOptions: {
                 color: '#1a1a1a',
@@ -60,10 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             imageOptions: {
                 crossOrigin: 'anonymous',
-                margin: 5, // Reduje un poco el margen para que el logo aproveche más espacio
-                imageSize: 0.6 // <--- AQUÍ ESTÁ EL CAMBIO (Antes 0.4)
-                               // 0.6 significa que ocupa el 60% del QR
-                               // No recomiendo poner más de 0.6 o podría dejar de leerse
+                margin: 0, // <--- CAMBIO: Margen a 0 para maximizar el logo
+                imageSize: 0.75 // <--- CAMBIO: Tamaño de la imagen a 75%
+                               // ADVERTENCIA: Más allá de 0.75, los códigos QR
+                               // pueden volverse muy difíciles de leer para los móviles.
             }
         };
 
