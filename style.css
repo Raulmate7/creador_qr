@@ -1,94 +1,176 @@
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f0f2f5;
+    font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    margin: 0;
-}
-
-.qr-container {
-    background-color: #ffffff;
-    padding: 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
-    text-align: center;
-    width: 90%;
-    max-width: 400px;
-}
-
-h1 {
-    font-size: 1.8rem;
     color: #333;
-    margin-top: 0;
+    overflow-x: hidden;
 }
 
-p {
+/* Fondo Animado */
+.background-animate {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    z-index: -1;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Tarjeta con efecto Cristal (Glassmorphism) */
+.qr-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2.5rem;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: transform 0.3s ease;
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
     color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+/* Inputs y Etiquetas */
+.input-group {
     margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.input-group label, .file-upload-wrapper label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
 }
 
 input[type="text"] {
-    width: calc(100% - 2rem);
-    padding: 1rem;
-    font-size: 1rem;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-}
-
-/* Estilos para el botón de subir logo */
-.file-upload-area {
-    margin-bottom: 1rem;
-}
-
-.upload-label {
-    display: block;
-    padding: 1rem;
-    background-color: #f8f9fa;
-    border: 2px dashed #ced4da;
-    border-radius: 8px;
-    cursor: pointer;
-    color: #495057;
-    transition: all 0.2s;
-}
-
-.upload-label:hover {
-    background-color: #e9ecef;
-    border-color: #007aff;
-}
-
-.hidden-file-input {
-    display: none; /* Ocultamos el input feo original */
-}
-
-button {
-    background-color: #007aff;
-    color: white;
-    font-size: 1.1rem;
-    font-weight: bold;
-    padding: 1rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
     width: 100%;
-    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s;
+    background: rgba(255, 255, 255, 0.9);
 }
 
-button:hover {
-    background-color: #0056b3;
+input[type="text"]:focus {
+    border-color: #23a6d5;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(35, 166, 213, 0.1);
 }
 
-#canvas-container {
-    margin: 1.5rem auto;
-    display: flex;         /* Para centrar el QR */
+/* Zona de carga de archivo */
+.upload-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    padding: 1.5rem;
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 
-#download-btn {
-    background-color: #34c759;
-    margin-top: 0;
+.upload-zone:hover {
+    background-color: #fff;
+    border-color: #23a6d5;
+    transform: translateY(-2px);
+}
+
+.upload-zone .icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.hidden-input {
+    display: none;
+}
+
+/* Botones */
+button {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #23a6d5, #23d5ab);
+    color: white;
+    box-shadow: 0 4px 15px rgba(35, 166, 213, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(35, 166, 213, 0.6);
+}
+
+.btn-secondary {
+    background-color: #333;
+    color: white;
+    margin-top: 1.5rem;
+}
+
+.btn-secondary:hover {
+    background-color: #000;
+}
+
+/* Contenedor del QR */
+.qr-output {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Clase para animar la aparición del QR */
+.qr-output.show {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .hidden {
