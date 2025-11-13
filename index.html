@@ -3,33 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de QR con Logo</title>
+    <title>QR Creator Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="qr-container">
-        <h1>Generador de QR</h1>
-        <p>Escribe tu enlace y sube un logo (opcional).</p>
+    <div class="background-animate"></div>
+
+    <div class="qr-card">
+        <div class="header">
+            <h1>✨ Crea tu QR</h1>
+            <p>Personaliza, añade tu logo y descarga.</p>
+        </div>
         
-        <input type="text" id="qr-text" placeholder="https://tu-pagina-web.com">
+        <div class="input-group">
+            <label>Tu Enlace o Texto</label>
+            <input type="text" id="qr-text" placeholder="Ej: https://miweb.com" autocomplete="off">
+        </div>
         
-        <div class="file-upload-area">
-            <label for="logo-upload" class="upload-label">
-                <span id="logo-text">📷 Subir Logo (Opcional)</span>
-                <input type="file" id="logo-upload" accept="image/*" class="hidden-file-input">
+        <div class="file-upload-wrapper">
+            <label>Logo Personalizado</label>
+            <label for="logo-upload" class="upload-zone" id="upload-zone">
+                <span class="icon">🖼️</span>
+                <span id="logo-text">Arrastra tu logo o haz clic aquí</span>
+                <input type="file" id="logo-upload" accept="image/*" class="hidden-input">
             </label>
         </div>
 
-        <button id="generate-btn">Generar QR</button>
+        <button id="generate-btn" class="btn-primary">
+            ⚡ Generar Código QR
+        </button>
 
-        <div id="canvas-container"></div>
+        <div id="canvas-container" class="qr-output">
+            </div>
         
-        <button id="download-btn" class="hidden">Descargar QR</button>
+        <button id="download-btn" class="btn-secondary hidden">
+            ⬇️ Descargar PNG
+        </button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
-    
     <script src="app.js"></script>
 </body>
 </html>
