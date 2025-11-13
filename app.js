@@ -5,67 +5,73 @@ document.addEventListener('DOMContentLoaded', () => {
     const generateBtn = document.getElementById('generate-btn');
     const canvasContainer = document.getElementById('canvas-container');
     const downloadBtn = document.getElementById('download-btn');
+    const uploadZone = document.getElementById('upload-zone');
 
     let qrCode = null; 
-    let uploadedLogoUrl = null; // Aquí guardaremos la imagen del usuario
+    let uploadedLogoUrl = null;
 
-    // 1. Escuchar cuando el usuario selecciona un archivo
+    // Efecto visual al seleccionar archivo
     logoUploadInput.addEventListener('change', (event) => {
         const file = event.target.files[0];
         if (file) {
-            // Leemos el archivo para poder mostrarlo
             const reader = new FileReader();
             reader.onload = (e) => {
-                uploadedLogoUrl = e.target.result; // Guardamos la imagen
-                logoTextSpan.textContent = "✅ " + file.name; // Cambiamos el texto del botón
+                uploadedLogoUrl = e.target.result;
+                logoTextSpan.textContent = "✅ " + file.name;
+                uploadZone.style.borderColor = "#23d5ab"; // Borde verde
+                uploadZone.style.backgroundColor = "#e0fdf4";
             };
             reader.readAsDataURL(file);
         }
     });
 
-    // 2. Generar el QR
     generateBtn.addEventListener('click', () => {
         const text = qrTextInput.value;
         if (!text) {
-            alert('Por favor, escribe una URL o texto.');
+            // Animación de error (sacudir input)
+            qrTextInput.style.borderColor = "#ff4757";
+            setTimeout(() => qrTextInput.style.borderColor = "#e0e0e0", 500);
             return;
         }
 
-        // Limpiamos el QR anterior
+        // Resetear contenedor
         canvasContainer.innerHTML = '';
+        canvasContainer.classList.remove('show'); // Resetear animación
 
-        // Configuración del QR
         const qrOptions = {
-            width: 300,
-            height: 300,
+            width: 280,
+            height: 280,
             data: text,
-            image: uploadedLogoUrl || '', // Usamos el logo si existe, si no, vacío
+            image: uploadedLogoUrl || '',
             dotsOptions: {
-                color: '#000000',
-                type: 'rounded'
+                color: '#1a1a1a',
+                type: 'rounded' // Puntos redondeados (más moderno)
+            },
+            cornersSquareOptions: {
+                type: 'extra-rounded' // Esquinas redondeadas
             },
             backgroundOptions: {
                 color: '#ffffff',
             },
             imageOptions: {
                 crossOrigin: 'anonymous',
-                margin: 10,
-                imageSize: 0.4 // Tamaño del logo (0.4 = 40% del QR)
+                margin: 10
             }
         };
 
-        // Crear y dibujar el QR
         qrCode = new QRCodeStyling(qrOptions);
         qrCode.append(canvasContainer);
         
-        // Mostrar botón de descarga
-        downloadBtn.classList.remove('hidden');
+        // Activar animación y mostrar botón descarga
+        setTimeout(() => {
+            canvasContainer.classList.add('show');
+            downloadBtn.classList.remove('hidden');
+        }, 100);
     });
 
-    // 3. Descargar el QR
     downloadBtn.addEventListener('click', () => {
         if (qrCode) {
-            qrCode.download({ name: 'mi-qr-con-logo', extension: 'png' });
+            qrCode.download({ name: 'mi-qr-pro', extension: 'png' });
         }
     });
 });
