@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
             reader.onload = (e) => {
                 uploadedLogoUrl = e.target.result;
                 logoTextSpan.textContent = "✅ " + file.name;
-                uploadZone.style.borderColor = "#23d5ab"; // Borde verde
+                uploadZone.style.borderColor = "#23d5ab"; 
                 uploadZone.style.backgroundColor = "#e0fdf4";
             };
             reader.readAsDataURL(file);
@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     generateBtn.addEventListener('click', () => {
         const text = qrTextInput.value;
         if (!text) {
-            // Animación de error (sacudir input)
             qrTextInput.style.borderColor = "#ff4757";
             setTimeout(() => qrTextInput.style.borderColor = "#e0e0e0", 500);
             return;
@@ -36,33 +35,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Resetear contenedor
         canvasContainer.innerHTML = '';
-        canvasContainer.classList.remove('show'); // Resetear animación
+        canvasContainer.classList.remove('show'); 
 
         const qrOptions = {
             width: 280,
             height: 280,
             data: text,
             image: uploadedLogoUrl || '',
+            // IMPORTANTE: Nivel de corrección Alto para soportar logos grandes
+            qrOptions: {
+                typeNumber: 0,
+                mode: 'Byte',
+                errorCorrectionLevel: 'H' // 'H' = High (Alto)
+            },
             dotsOptions: {
                 color: '#1a1a1a',
-                type: 'rounded' // Puntos redondeados (más moderno)
+                type: 'rounded' 
             },
             cornersSquareOptions: {
-                type: 'extra-rounded' // Esquinas redondeadas
+                type: 'extra-rounded' 
             },
             backgroundOptions: {
                 color: '#ffffff',
             },
             imageOptions: {
                 crossOrigin: 'anonymous',
-                margin: 10
+                margin: 5, // Reduje un poco el margen para que el logo aproveche más espacio
+                imageSize: 0.6 // <--- AQUÍ ESTÁ EL CAMBIO (Antes 0.4)
+                               // 0.6 significa que ocupa el 60% del QR
+                               // No recomiendo poner más de 0.6 o podría dejar de leerse
             }
         };
 
         qrCode = new QRCodeStyling(qrOptions);
         qrCode.append(canvasContainer);
         
-        // Activar animación y mostrar botón descarga
         setTimeout(() => {
             canvasContainer.classList.add('show');
             downloadBtn.classList.remove('hidden');
