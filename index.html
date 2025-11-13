@@ -3,153 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de Códigos QR con Imagen</title>
+    <title>Generador de QR con Logo</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-content">
-                <svg class="icon-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>
-                    <rect x="6" y="6" width="4" height="4"></rect>
-                    <rect x="14" y="6" width="4" height="4"></rect>
-                    <rect x="6" y="14" width="4" height="4"></rect>
-                    <circle cx="17" cy="17" r="2"></circle>
-                </svg>
-                <h1 class="title">Generador de Códigos QR</h1>
-            </div>
-            <p class="subtitle">Crea códigos QR únicos con tu imagen incrustada en el centro. Personaliza, genera y descarga al instante.</p>
-        </header>
 
-        <!-- Main Content -->
-        <div class="content-wrapper">
-            <!-- Input Section -->
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">Configurar QR</h2>
-                    <p class="card-description">Proporciona la URL destino y una imagen para personalizar tu código QR</p>
-                </div>
-                
-                <div class="card-content">
-                    <!-- URL Input -->
-                    <div class="form-group">
-                        <label for="urlInput" class="label">URL Destino</label>
-                        <input 
-                            type="url" 
-                            id="urlInput" 
-                            class="input-field"
-                            placeholder="https://ejemplo.com"
-                            value="https://ejemplo.com"
-                        >
-                        <span class="input-hint">El código QR llevará a esta dirección</span>
-                    </div>
-
-                    <!-- Image Upload -->
-                    <div class="form-group">
-                        <label class="label">Imagen para el Centro</label>
-                        <div class="upload-area" id="imageUploadArea">
-                            <input type="file" id="imageInput" accept="image/*" hidden>
-                            <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                                <polyline points="21 15 16 10 5 21"></polyline>
-                            </svg>
-                            <span class="upload-text" id="imageUploadText">Seleccionar imagen</span>
-                            <span class="upload-hint">PNG, JPG o GIF (recomendado: cuadrado)</span>
-                        </div>
-                    </div>
-
-                    <!-- Image Preview -->
-                    <div class="preview-container" id="imagePreviewContainer" style="display: none;">
-                        <label class="label">Vista previa de imagen</label>
-                        <div class="image-preview-box">
-                            <img id="imagePreview" alt="Preview">
-                        </div>
-                    </div>
-
-                    <!-- QR Size -->
-                    <div class="form-group">
-                        <label for="qrSize" class="label">Tamaño del QR</label>
-                        <div class="size-selector">
-                            <button class="size-btn" data-size="200">Pequeño</button>
-                            <button class="size-btn active" data-size="400">Medio</button>
-                            <button class="size-btn" data-size="600">Grande</button>
-                            <button class="size-btn" data-size="800">Muy Grande</button>
-                        </div>
-                    </div>
-
-                    <!-- Generate Button -->
-                    <button class="btn btn-primary" id="generateBtn">
-                        Generar Código QR
-                    </button>
-
-                    <!-- Loading State -->
-                    <div class="loading" id="loading" style="display: none;">
-                        <div class="spinner"></div>
-                        <span>Generando código QR...</span>
-                    </div>
-
-                    <!-- Error Message -->
-                    <div class="error-message" id="errorMessage" style="display: none;">
-                        <p id="errorText"></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Preview Section -->
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">Vista Previa</h2>
-                    <p class="card-description">Aquí aparecerá tu código QR generado</p>
-                </div>
-                
-                <div class="card-content preview-section">
-                    <div class="qr-preview-container" id="qrPreviewContainer" style="display: none;">
-                        <div id="qrCanvas" class="qr-canvas"></div>
-                        <button class="btn btn-success" id="downloadBtn">
-                            <svg style="width: 1.25rem; height: 1.25rem; display: inline-block; vertical-align: middle; margin-right: 0.5rem;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                <polyline points="7 10 12 15 17 10"></polyline>
-                                <line x1="12" y1="15" x2="12" y2="3"></line>
-                            </svg>
-                            Descargar QR
-                        </button>
-                    </div>
-                    <div class="empty-state" id="emptyState">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>
-                            <rect x="6" y="6" width="4" height="4"></rect>
-                            <rect x="14" y="6" width="4" height="4"></rect>
-                            <rect x="6" y="14" width="4" height="4"></rect>
-                            <circle cx="17" cy="17" r="2"></circle>
-                        </svg>
-                        <p>Tu código QR aparecerá aquí</p>
-                    </div>
-                </div>
-            </div>
+    <div class="qr-container">
+        <h1>Generador de QR</h1>
+        <p>Escribe tu enlace y sube un logo (opcional).</p>
+        
+        <input type="text" id="qr-text" placeholder="https://tu-pagina-web.com">
+        
+        <div class="file-upload-area">
+            <label for="logo-upload" class="upload-label">
+                <span id="logo-text">📷 Subir Logo (Opcional)</span>
+                <input type="file" id="logo-upload" accept="image/*" class="hidden-file-input">
+            </label>
         </div>
 
-        <!-- Info Cards -->
-        <div class="info-grid">
-            <div class="info-card">
-                <h3>Imagen Personalizada</h3>
-                <p>Incrusta tu logo o imagen en el centro del código QR</p>
-            </div>
-            <div class="info-card">
-                <h3>URL Personalizada</h3>
-                <p>Dirige a tus usuarios a cualquier dirección web</p>
-            </div>
-            <div class="info-card">
-                <h3>Descarga Instantánea</h3>
-                <p>Descarga tu código QR en alta resolución</p>
-            </div>
-        </div>
+        <button id="generate-btn">Generar QR</button>
+
+        <div id="canvas-container"></div>
+        
+        <button id="download-btn" class="hidden">Descargar QR</button>
     </div>
 
-    <!-- QR Code Library -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
+    
     <script src="app.js"></script>
 </body>
 </html>
